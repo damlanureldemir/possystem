@@ -106,8 +106,7 @@
 
                 </ul>
                 <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                    <a class="navbar-brand brand-logo" href="index.html"><img src="https://www.connectpos.com/wp-content/uploads/shopify-pos.png" style="width:170px;height: 170px" alt="logo"/></a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="https://www.connectpos.com/wp-content/uploads/shopify-pos.png" style="width:80px;height: 80px" alt="logo"/></a>
+                    <img src="{{asset('front/images/favicon.png')}}" style="width:170px;height: 170px" alt="logo"/>
                 </div>
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item dropdown  d-lg-flex d-none">
@@ -132,22 +131,20 @@
                     <li class="nav-item dropdown d-lg-flex d-none">
                         <button type="button" class="btn btn-inverse-primary btn-sm">Settings</button>
                     </li>
-                    <li class="nav-item nav-profile dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-                            <span class="nav-profile-name">Johnson</span>
-                            <span class="online-status"></span>
-                            <img src="{{asset('front/')}}/images/faces/face28.png" alt="profile"/>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle justify-content-end" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{\Illuminate\Support\Facades\Auth::user()->name}}
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item">
-                                <i class="mdi mdi-settings text-primary"></i>
-                                Settings
-                            </a>
-                            <a class="dropdown-item">
-                                <i class="mdi mdi-logout text-primary"></i>
-                                Logout
-                            </a>
-                        </div>
+                        <ul class="dropdown-menu">
+                            <form method="POST" action="{{ route('logout') }}" x-data>
+                                @csrf
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+        this.closest('form').submit(); ">Çıkış yap</a>
+                                </li>
+                            </form>
+                            <li><a class="dropdown-item" href="{{route('dashboard')}}">Dashboard</a></li>
+                        </ul>
                     </li>
                 </ul>
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
@@ -180,7 +177,7 @@
                     </a>
                     <div class="submenu">
                         <ul>
-                            <li class="nav-item"><a class="nav-link" href="#">Kategoriler</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('category.index')}}">Kategoriler</a></li>
                         </ul>
                     </div>
                 </li>
@@ -199,24 +196,28 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="mdi mdi-emoticon menu-icon"></i>
-                        <span class="menu-title">Müşteriler</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="mdi mdi-codepen menu-icon"></i>
                         <span class="menu-title">İşlemler</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="submenu">
-                        <ul class="submenu-item">
-                            <li class="nav-item"><a class="nav-link" href="{{asset('front/')}}/pages/samples/login-2.html">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{asset('front/')}}/pages/samples/register-2.html">Register</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Admin Giriş</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Çıkış</a></li>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle justify-content-end" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{\Illuminate\Support\Facades\Auth::user()->name}}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <form method="POST" action="{{ route('logout') }}" x-data>
+                                        @csrf
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+        this.closest('form').submit(); ">Çıkış yap</a>
+                                        </li>
+                                    </form>
+                                    <li><a class="dropdown-item" href="{{route('dashboard')}}">Dashboard</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </li>

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +27,19 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-});
-Route::get('/dashboard',function (){
-    return view('panel.pages.index');
-});
-Route::get('/anasayfa',function (){
-    return view('front.master');
+    Route::get('/panela',function (){
+        return view('panel.pages.index');
+    })->name('admin.dashboard')->middleware('role:admin'); // admin rolüne sahip olanlar erişebilir
+    Route::get('/anasayfa',function (){
+        return view('front.master');
+    })->name('user.dashboard')->middleware('role:user'); // user rolüne sahip olanlar
+
+    Route::prefix('/category')->name('category.')->group(function (){
+        Route::get('/index',[CategoryController::class,'index'])->name('index');
+        Route::get('/fetch',[CategoryController::class,'fetch'])->name('fetch');
+        Route::post('/create',[CategoryController::class,'create'])->name('create');
+        Route::post('/delete',[CategoryController::class,'deleteCategory'])->name('delete');
+    });
+
+
 });

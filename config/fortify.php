@@ -61,7 +61,19 @@ return [
     |
     */
 
+    'redirects'=>[
+        'login'=>function(){
+            $user=\Illuminate\Support\Facades\Auth::user();
+            if ($user->hasRole('User')){
+                return route('front.master');
+            }
+        },
+        'logut'=>'login'
+    ],
+
     'home' => RouteServiceProvider::HOME,
+
+
 
     /*
     |--------------------------------------------------------------------------

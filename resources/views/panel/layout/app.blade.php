@@ -50,7 +50,7 @@
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="{{asset('panel/assets/js/config.js')}}"></script>
+    <script src="{{asset('anel/assets/js/config.js')}}"></script>
 </head>
 
 <body>
@@ -545,12 +545,12 @@
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
-                                <li>
-                                    <a class="dropdown-item" href="auth-login-basic.html">
-                                        <i class="bx bx-power-off me-2"></i>
-                                        <span class="align-middle">Log Out</span>
-                                    </a>
-                                </li>
+                                <form method="POST" action="{{ url('/logout') }}" x-data>
+                                    @csrf
+                                    <li>
+                                        <a class="dropdown-item" href="{{ url('/logout') }}" onclick="event.preventDefault(); this.closest('form').submit(); ">Çıkış yap</a>
+                                    </li>
+                                </form>
                             </ul>
                         </li>
                         <!--/ User -->
@@ -562,9 +562,6 @@
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
-                <!-- Content -->
-                @yield('content')
-                <!-- / Content -->
 
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme">
@@ -599,10 +596,47 @@
                 </footer>
                 <!-- / Footer -->
 
-    <!-- Overla
+                <div class="content-backdrop fade"></div>
+            </div>
+            <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
 
+<div class="buy-now">
+    <a
+        href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
+        target="_blank"
+        class="btn btn-danger btn-buy-now"
+    >Upgrade to Pro</a
+    >
+</div>
 
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+<script src="{{asset('panel/assets/vendor/libs/jquery/jquery.js')}}"></script>
+<script src="{{asset('panel/assets/vendor/libs/popper/popper.js')}}"></script>
+<script src="{{asset('panel/assets/vendor/js/bootstrap.js')}}"></script>
+<script src="{{asset('panel/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
+
+<script src="{{asset('panel/assets/vendor/js/menu.js')}}"></script>
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+<script src="{{asset('panel/assets/vendor/libs/apex-charts/apexcharts.js')}}"></script>
+
+<!-- Main JS -->
+<script src="{{asset('panel/assets/js/main.js')}}"></script>
+
+<!-- Page JS -->
+<script src="{{asset('panel/assets/js/dashboards-analytics.js')}}"></script>
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
